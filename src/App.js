@@ -7,7 +7,6 @@ import ContactForm from './components/Contact';
 
 function App() {
 
-
   const [categories] = useState([
     {
       name: "commercial",
@@ -24,6 +23,8 @@ function App() {
 
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
+  const [contactSelected, setContactSelected] = useState(false);
+
   return (
     
     <div>
@@ -31,11 +32,30 @@ function App() {
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-        <ContactForm></ContactForm>
-        <Gallery currentCategory={currentCategory}></Gallery>
-        <About></About>
+        {/* if contactSelected is false, which it is by default, only render the gallery and about info */}
+        {/* {!condition} ? true code here : false code here */}
+        {!contactSelected ? (
+          <>
+
+            <Gallery currentCategory={currentCategory}></Gallery>    
+            <About></About>
+          
+          </>
+        ) : (
+
+          // otherwise render the contact form
+          <ContactForm></ContactForm>
+
+        )}
+
+
+        
+        
+        
       </main>
     </div>
   
